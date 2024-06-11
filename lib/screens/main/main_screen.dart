@@ -14,7 +14,7 @@ class _MainScreenState extends State<MainScreen> {
 
   final List<Widget> screen = const [
     HomeScreen(),
-     CountryScreen(),
+    CountryScreen(),
   ];
 
   void tapIndex(int index) {
@@ -32,6 +32,10 @@ class _MainScreenState extends State<MainScreen> {
       ),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
+        selectedLabelStyle:
+            const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+        unselectedLabelStyle:
+            const TextStyle(fontWeight: FontWeight.w600, fontSize: 18),
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home_filled), label: 'Home'),
           BottomNavigationBarItem(
@@ -39,6 +43,7 @@ class _MainScreenState extends State<MainScreen> {
         ],
         currentIndex: selectedIndex,
         onTap: tapIndex,
+        elevation: 1,
       ),
     );
   }

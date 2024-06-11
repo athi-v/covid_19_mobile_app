@@ -1,7 +1,5 @@
 import 'package:covid_19_mobile_app/widgets/home_card.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
