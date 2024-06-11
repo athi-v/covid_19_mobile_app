@@ -18,6 +18,9 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Covid App',
       theme: ThemeData(
+        progressIndicatorTheme: const ProgressIndicatorThemeData(
+          color: Colors.black
+        ),
         fontFamily: 'DarkerGrotesque',
         appBarTheme: const AppBarTheme(
           backgroundColor: Color.fromRGBO(245, 245, 245, 1),

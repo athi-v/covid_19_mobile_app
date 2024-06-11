@@ -35,10 +35,12 @@ class HomeCard extends StatelessWidget {
                   )
                 ],
               ),
-              Text(
-                value,
-                style:
-                    const TextStyle(fontSize: 40, fontWeight: FontWeight.w700),
+              Flexible(
+                child: Text(
+                  value,
+                  style: const TextStyle(
+                      fontSize: 40, fontWeight: FontWeight.w700),
+                ),
               ),
             ],
           ),
