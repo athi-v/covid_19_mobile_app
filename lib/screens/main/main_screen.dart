@@ -31,14 +31,16 @@ class _MainScreenState extends State<MainScreen> {
         children: screen,
       ),
       bottomNavigationBar: BottomNavigationBar(
+        
         type: BottomNavigationBarType.fixed,
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home_filled), label: 'Home'),
           BottomNavigationBarItem(
-              icon: Icon(Icons.place_outlined), label: 'Country')
+              icon: Icon(Icons.public), label: 'Country')
         ],
         currentIndex: selectedIndex,
         onTap: tapIndex,
+        elevation: 1,
       ),
     );
   }
