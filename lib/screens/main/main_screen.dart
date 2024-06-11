@@ -31,15 +31,12 @@ class _MainScreenState extends State<MainScreen> {
         children: screen,
       ),
       bottomNavigationBar: BottomNavigationBar(
+        
         type: BottomNavigationBarType.fixed,
-        selectedLabelStyle:
-            const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-        unselectedLabelStyle:
-            const TextStyle(fontWeight: FontWeight.w600, fontSize: 18),
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home_filled), label: 'Home'),
           BottomNavigationBarItem(
-              icon: Icon(Icons.place_outlined), label: 'Country')
+              icon: Icon(Icons.public), label: 'Country')
         ],
         currentIndex: selectedIndex,
         onTap: tapIndex,
