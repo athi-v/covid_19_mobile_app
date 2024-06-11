@@ -1,7 +1,15 @@
 import 'package:flutter/material.dart';
 
 class HomeCard extends StatelessWidget {
-  const HomeCard({super.key});
+  const HomeCard(
+      {super.key,
+      required this.title,
+      required this.icon,
+      required this.value});
+
+  final String title;
+  final String value;
+  final IconData icon;
 
   @override
   Widget build(BuildContext context) {
@@ -11,16 +19,27 @@ class HomeCard extends StatelessWidget {
       decoration: const BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.all(Radius.circular(2))),
-      child: const Column(
+      child: Column(
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: [Icon(Icons.biotech), Text('Text Conducted')],
+                children: [
+                  Icon(icon),
+                  Text(
+                    title,
+                    style: const TextStyle(
+                        fontSize: 25, fontWeight: FontWeight.w600),
+                  )
+                ],
               ),
-              Text('25852'),
+              Text(
+                value,
+                style:
+                    const TextStyle(fontSize: 40, fontWeight: FontWeight.w700),
+              ),
             ],
           ),
         ],

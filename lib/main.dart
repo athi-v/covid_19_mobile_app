@@ -14,10 +14,11 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Covid App',
       theme: ThemeData(
-        appBarTheme:
-            const AppBarTheme(backgroundColor: Color.fromRGBO(4, 47, 46, 1)),
-            scaffoldBackgroundColor: const Color.fromRGBO(245, 245, 245, 1)
-      ),
+          fontFamily: 'DarkerGrotesque',
+          appBarTheme:  const AppBarTheme(
+            backgroundColor:   Color.fromRGBO(245, 245, 245, 1),
+          ),
+          scaffoldBackgroundColor: const Color.fromRGBO(245, 245, 245, 1)),
       home: const MainScreen(),
     );
   }

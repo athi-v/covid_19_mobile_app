@@ -14,7 +14,7 @@ class _MainScreenState extends State<MainScreen> {
 
   final List<Widget> screen = const [
     HomeScreen(),
-    CountryScreen(),
+     CountryScreen(),
   ];
 
   void tapIndex(int index) {
