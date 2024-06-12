@@ -12,3 +12,13 @@ Future<Map<String, dynamic>> apiWorldwide() async {
     throw Exception("Failed to load data");
   }
 }
+
+Future<Map<String, dynamic>> apiCountriesByDetails(String country) async {
+  final String url = '$baseUrl/countries/$country';
+  final response = await http.get(Uri.parse(url));
+  if (response.statusCode == 200) {
+    return json.decode(response.body);
+  } else {
+    throw Exception("Failed to load data");
+  }
+}

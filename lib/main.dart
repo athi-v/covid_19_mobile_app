@@ -1,4 +1,3 @@
-import 'package:covid_19_mobile_app/screens/main/main_screen.dart';
 import 'package:covid_19_mobile_app/screens/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
