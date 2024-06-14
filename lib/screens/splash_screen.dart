@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:covid_19_mobile_app/screens/main/main_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -22,29 +21,24 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            SvgPicture.asset(
-              'assets/images/covid_19.svg',
-              semanticsLabel: 'Covid 19',
-              height: 50,
-              width: 70,
-            ),
-            const Text(
+      
+             Text(
               'Byte Data',
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 50),
             ),
-            const SizedBox(
+             SizedBox(
               height: 10,
             ),
-            const SizedBox(
+             SizedBox(
               height: 10,
             ),
-            const CircularProgressIndicator()
+             CircularProgressIndicator()
           ],
         ),
       ),

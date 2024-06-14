@@ -18,7 +18,7 @@ class _CountryScreenState extends State<CountryScreen> {
   void initState() {
     super.initState();
     _country = TextEditingController();
-    _covidCountrydata = Future.value({});
+    _covidCountrydata = apiCountriesByDetails(_country.text);
   }
 
   void _searchCountry() {
@@ -44,7 +44,12 @@ class _CountryScreenState extends State<CountryScreen> {
               children: [
                 TextField(
                   controller: _country,
+                  style: const TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.w600
+                  ),
                   decoration: const InputDecoration(
+                    
                     hintStyle: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.w600,
