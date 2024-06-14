@@ -1,4 +1,3 @@
-import 'package:covid_19_mobile_app/screens/main/main_screen.dart';
 import 'package:covid_19_mobile_app/screens/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -19,9 +18,8 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Covid App',
       theme: ThemeData(
-        progressIndicatorTheme: const ProgressIndicatorThemeData(
-          color: Colors.black
-        ),
+        progressIndicatorTheme:
+            const ProgressIndicatorThemeData(color: Colors.black),
         fontFamily: 'DarkerGrotesque',
         appBarTheme: const AppBarTheme(
           backgroundColor: Color.fromRGBO(245, 245, 245, 1),
