@@ -22,9 +22,28 @@ class _CountryScreenState extends State<CountryScreen> {
   }
 
   void _searchCountry() {
-    setState(() {
-      _covidCountrydata = apiCountriesByDetails(_country.text);
-    });
+    if (_country.text.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          showCloseIcon: true,
+          backgroundColor: Colors.red,
+          content: Text(
+            'Please type a country',
+            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+          ),
+        ),
+      );
+    } else {
+      setState(() {
+        _covidCountrydata = apiCountriesByDetails(_country.text);
+      });
+    }
+  }
+
+  @override
+  void dispose() {
+    _country.dispose();
+    super.dispose();
   }
 
   @override
@@ -45,18 +64,15 @@ class _CountryScreenState extends State<CountryScreen> {
                 TextField(
                   controller: _country,
                   style: const TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.w600
-                  ),
+                      fontSize: 20, fontWeight: FontWeight.w600),
                   decoration: const InputDecoration(
-                    
                     hintStyle: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.w600,
                     ),
                     hintText: 'Enter country name: ',
                     border: OutlineInputBorder(
-                      borderSide: BorderSide(width: 1),
+                      borderSide: BorderSide(color: Colors.black),
                     ),
                   ),
                 ),
@@ -98,7 +114,11 @@ class _CountryScreenState extends State<CountryScreen> {
                     if (snapshot.connectionState == ConnectionState.waiting) {
                       return const CircularProgressIndicator();
                     } else if (snapshot.hasError) {
-                      return const Text('Error');
+                      return  Text('${snapshot.error}', style: const TextStyle(
+                        color: Colors.red,
+                        fontSize: 15,
+                        fontWeight: FontWeight.w600
+                      ),);
                     } else if (snapshot.hasData) {
                       return Column(
                         children: [
@@ -110,7 +130,7 @@ class _CountryScreenState extends State<CountryScreen> {
                                 height: 50,
                               ),
                               Text(
-                                snapshot.data!['country'],
+                                snapshot.data!['country'] ?? '',
                                 style: const TextStyle(
                                     fontSize: 20, fontWeight: FontWeight.bold),
                               ),
@@ -144,11 +164,5 @@ class _CountryScreenState extends State<CountryScreen> {
         ),
       ),
     );
-  }
-
-  @override
-  void dispose() {
-    _country.dispose();
-    super.dispose();
   }
 }
