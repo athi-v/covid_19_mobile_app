@@ -114,10 +114,29 @@ class _CountryScreenState extends State<CountryScreen> {
                   height: 20,
                 ),
                 FutureBuilder<Map<String, dynamic>>(
+                  initialData: const {},
                   future: _covidCountrydata,
                   builder: (context, snapshot) {
                     if (snapshot.connectionState == ConnectionState.waiting) {
                       return const CircularProgressIndicator();
+                    } else if (snapshot.hasError) {
+                      if (_country.text.isEmpty) {
+                        return const Text(
+                          'Please type a country',
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold),
+                        );
+                      } else {
+                        return Text(
+                          '${snapshot.error}',
+                          style: const TextStyle(
+                              color: Colors.red,
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold),
+                        );
+                      }
                     } else if (snapshot.hasData) {
                       return Column(
                         children: [
@@ -151,14 +170,6 @@ class _CountryScreenState extends State<CountryScreen> {
                               value: (formatNumber(snapshot.data!['deaths']))
                                   .toString()),
                         ],
-                      );
-                    } else if (_country.text.isEmpty) {
-                      return const Text(
-                        'Please type a country',
-                        style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 15,
-                            fontWeight: FontWeight.bold),
                       );
                     } else {
                       return const Column(
