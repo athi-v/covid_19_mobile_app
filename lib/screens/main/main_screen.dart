@@ -1,6 +1,5 @@
 import 'package:covid_19_mobile_app/screens/home_screen.dart';
 import 'package:covid_19_mobile_app/screens/country_screen.dart';
-import 'package:covid_19_mobile_app/screens/news_screen.dart';
 import 'package:flutter/material.dart';
 
 class MainScreen extends StatefulWidget {
@@ -16,7 +15,6 @@ class _MainScreenState extends State<MainScreen> {
   final List<Widget> screen = const [
     HomeScreen(),
     CountryScreen(),
-    NewsScreen(),
   ];
 
   void tapIndex(int index) {
@@ -33,15 +31,10 @@ class _MainScreenState extends State<MainScreen> {
         children: screen,
       ),
       bottomNavigationBar: BottomNavigationBar(
-        
         type: BottomNavigationBarType.fixed,
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home_filled), label: 'Home'),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.public), label: 'Country'),
-                        BottomNavigationBarItem(
-              icon: Icon(Icons.newspaper), label: 'News'),
-
+          BottomNavigationBarItem(icon: Icon(Icons.public), label: 'Country'),
         ],
         currentIndex: selectedIndex,
         onTap: tapIndex,

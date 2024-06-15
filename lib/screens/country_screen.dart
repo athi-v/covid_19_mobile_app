@@ -18,13 +18,37 @@ class _CountryScreenState extends State<CountryScreen> {
   void initState() {
     super.initState();
     _country = TextEditingController();
-    _covidCountrydata = Future.value({});
+
+    if (_country.text.isEmpty) {
+      _covidCountrydata = apiCountriesByDetails(' ');
+    } else {
+      _covidCountrydata = apiCountriesByDetails(_country.text);
+    }
   }
 
   void _searchCountry() {
-    setState(() {
-      _covidCountrydata = apiCountriesByDetails(_country.text);
-    });
+    if (_country.text.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          showCloseIcon: true,
+          backgroundColor: Colors.red,
+          content: Text(
+            'Please type a country',
+            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+          ),
+        ),
+      );
+    } else {
+      setState(() {
+        _covidCountrydata = apiCountriesByDetails(_country.text);
+      });
+    }
+  }
+
+  @override
+  void dispose() {
+    _country.dispose();
+    super.dispose();
   }
 
   @override
@@ -44,6 +68,8 @@ class _CountryScreenState extends State<CountryScreen> {
               children: [
                 TextField(
                   controller: _country,
+                  style: const TextStyle(
+                      fontSize: 20, fontWeight: FontWeight.w600),
                   decoration: const InputDecoration(
                     hintStyle: TextStyle(
                       fontSize: 20,
@@ -51,7 +77,7 @@ class _CountryScreenState extends State<CountryScreen> {
                     ),
                     hintText: 'Enter country name: ',
                     border: OutlineInputBorder(
-                      borderSide: BorderSide(width: 1),
+                      borderSide: BorderSide(color: Colors.black),
                     ),
                   ),
                 ),
@@ -88,12 +114,29 @@ class _CountryScreenState extends State<CountryScreen> {
                   height: 20,
                 ),
                 FutureBuilder<Map<String, dynamic>>(
+                  initialData: const {},
                   future: _covidCountrydata,
                   builder: (context, snapshot) {
                     if (snapshot.connectionState == ConnectionState.waiting) {
                       return const CircularProgressIndicator();
                     } else if (snapshot.hasError) {
-                      return const Text('Error');
+                      if (_country.text.isEmpty) {
+                        return const Text(
+                          'Please type a country',
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold),
+                        );
+                      } else {
+                        return Text(
+                          '${snapshot.error}',
+                          style: const TextStyle(
+                              color: Colors.red,
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold),
+                        );
+                      }
                     } else if (snapshot.hasData) {
                       return Column(
                         children: [
@@ -105,7 +148,7 @@ class _CountryScreenState extends State<CountryScreen> {
                                 height: 50,
                               ),
                               Text(
-                                snapshot.data!['country'],
+                                snapshot.data!['country'] ?? '',
                                 style: const TextStyle(
                                     fontSize: 20, fontWeight: FontWeight.bold),
                               ),
@@ -129,7 +172,27 @@ class _CountryScreenState extends State<CountryScreen> {
                         ],
                       );
                     } else {
-                      return const Text('No data');
+                      return const Column(
+                        children: [
+                          Text(
+                            'Error! No Data Found. Please Try again later.',
+                            style: TextStyle(
+                                color: Colors.red,
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold),
+                          ),
+                          SizedBox(
+                            height: 5,
+                          ),
+                          Text(
+                            'Please Try again later.',
+                            style: TextStyle(
+                                color: Colors.red,
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold),
+                          ),
+                        ],
+                      );
                     }
                   },
                 )
@@ -139,11 +202,5 @@ class _CountryScreenState extends State<CountryScreen> {
         ),
       ),
     );
-  }
-
-  @override
-  void dispose() {
-    _country.dispose();
-    super.dispose();
   }
 }
