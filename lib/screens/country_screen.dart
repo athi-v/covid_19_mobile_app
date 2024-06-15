@@ -18,7 +18,12 @@ class _CountryScreenState extends State<CountryScreen> {
   void initState() {
     super.initState();
     _country = TextEditingController();
-    _covidCountrydata = apiCountriesByDetails(_country.text);
+
+    if (_country.text.isEmpty) {
+      _covidCountrydata = apiCountriesByDetails(' ');
+    } else {
+      _covidCountrydata = apiCountriesByDetails(_country.text);
+    }
   }
 
   void _searchCountry() {
@@ -113,12 +118,6 @@ class _CountryScreenState extends State<CountryScreen> {
                   builder: (context, snapshot) {
                     if (snapshot.connectionState == ConnectionState.waiting) {
                       return const CircularProgressIndicator();
-                    } else if (snapshot.hasError) {
-                      return  Text('${snapshot.error}', style: const TextStyle(
-                        color: Colors.red,
-                        fontSize: 15,
-                        fontWeight: FontWeight.w600
-                      ),);
                     } else if (snapshot.hasData) {
                       return Column(
                         children: [
@@ -153,8 +152,36 @@ class _CountryScreenState extends State<CountryScreen> {
                                   .toString()),
                         ],
                       );
+                    } else if (_country.text.isEmpty) {
+                      return const Text(
+                        'Please type a country',
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 15,
+                            fontWeight: FontWeight.bold),
+                      );
                     } else {
-                      return const Text('No data');
+                      return const Column(
+                        children: [
+                          Text(
+                            'Error! No Data Found. Please Try again later.',
+                            style: TextStyle(
+                                color: Colors.red,
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold),
+                          ),
+                          SizedBox(
+                            height: 5,
+                          ),
+                          Text(
+                            'Please Try again later.',
+                            style: TextStyle(
+                                color: Colors.red,
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold),
+                          ),
+                        ],
+                      );
                     }
                   },
                 )
